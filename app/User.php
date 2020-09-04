@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'firstname', 'lastname', 'email', 'password',
     ];
 
     /**
@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function volledigeNaam() {
+        return $this->firstname . " " . $this->lastname;
+    }
+
+    public function family() {
+        return $this->belongsTo('App\Family', 'family_id');
+    }
 }
