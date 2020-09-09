@@ -94,6 +94,29 @@
                     @endforelse
                 </div>
             </div>
+            <div class="card mt-4">
+                <div class="card-header">
+                    {{ __('Categorien') }}
+                    <a href="{{ @route('category.create') }}">
+                        <button type="button" class="btn btn-outline-primary  float-right">Add</button>
+                    </a>
+                </div>
+
+                <div class="card-body">
+                    @forelse($user->family->categories as $categorie)
+                        <div>
+                            <a href="{{ route('category.show', ['category' => $categorie->id]) }}">
+                                {{ $categorie->category }}
+                            </a>
+                            <a href="{{ route('category.edit', ['category' => $categorie->id]) }}">
+                                <button type="button" class="btn btn-outline-secondary float-right">Edit</button>
+                            </a>
+                        </div>
+                    @empty
+                        Je hebt geen categorien.
+                    @endforelse
+                </div>
+            </div>
         </div>
     </div>
 </div>

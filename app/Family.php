@@ -23,6 +23,10 @@ class Family extends Model
         return $this->hasMany('App\Store');
     }
 
+    public function categories() {
+        return $this->hasMany('App\Category');
+    }
+
     public function owner() {
         return $this->hasOne('App\User', 'owner_id', 'id');
     }

@@ -1,0 +1,6 @@
+- being able to log in - done
+- being able to create a family - done
+- being able to invite family members - done
+- being able to add stores per family - done
+- being able to add transactions
+- being able to add returning transactions

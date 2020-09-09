@@ -20,15 +20,26 @@ Route::get('/', function () {
 \Illuminate\Support\Facades\Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
 Route::get('/invitation/{token}', 'Auth\InvitationController@create')->name('invitation.create');
 Route::post('/invitation/{token}', 'Auth\InvitationController@store')->name('invitation.store');
+
 Route::get('/family/{family}/edit', 'Family\FamilyController@edit')->name('family.edit');
 Route::get('/family/{family}', 'Family\FamilyController@show')->name('family.show');
+
 Route::get('/users/create', 'Users\InvitationController@create')->name('user.create');
 Route::post('/users', 'Users\InvitationController@store')->name('user.store');
-Route::get('/stores', 'Store\Storecontroller@index')->name('store.index');
-Route::post('/stores', 'Store\Storecontroller@store')->name('store.store');
-Route::get('/stores/create', 'Store\Storecontroller@create')->name('store.create');
-Route::get('/stores/{store}', 'Store\Storecontroller@show')->name('store.show');
-Route::post('/stores/{store}', 'Store\Storecontroller@update')->name('store.update');
-Route::get('/stores/{store}/edit', 'Store\Storecontroller@edit')->name('store.edit');
+
+Route::get('/stores', 'Store\StoreController@index')->name('store.index');
+Route::post('/stores', 'Store\StoreController@store')->name('store.store');
+Route::get('/stores/create', 'Store\StoreController@create')->name('store.create');
+Route::get('/stores/{store}', 'Store\StoreController@show')->name('store.show');
+Route::post('/stores/{store}', 'Store\StoreController@update')->name('store.update');
+Route::get('/stores/{store}/edit', 'Store\StoreController@edit')->name('store.edit');
+
+Route::get('/categories', 'Category\CategoryController@index')->name('category.index');
+Route::post('/categories', 'Category\CategoryController@store')->name('category.store');
+Route::get('/categories/create', 'Category\CategoryController@create')->name('category.create');
+Route::get('/categories/{category}', 'Category\CategoryController@show')->name('category.show');
+Route::post('/categories/{category}', 'Category\CategoryController@update')->name('category.update');
+Route::get('/categories/{category}/edit', 'Category\CategoryController@edit')->name('category.edit');
