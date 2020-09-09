@@ -45,7 +45,11 @@
             <div class="card mt-4">
                 <div class="card-header">
                     {{ __('Familie') }}
-                    <button type="button" class="btn btn-outline-primary  float-right">Add</button>
+                    @if($user->id === $user->family->owner_id)
+                        <a href="{{ @route('user.create') }}">
+                            <button type="button" class="btn btn-outline-primary  float-right">Add</button>
+                        </a>
+                    @endif
                 </div>
 
                 <div class="card-body">
@@ -53,7 +57,7 @@
                         $isErFamilie = 0;
                     @endphp
                     @foreach($user->family->users as $member)
-                        @if($member->id !== $user->id)
+                        @if($member->id !== $user->id && $member->active)
                             <div>{{ $member->volledigeNaam() }}</div>
                             @php
                                 $isErFamilie = 1;
@@ -70,12 +74,21 @@
             <div class="card mt-4">
                 <div class="card-header">
                     {{ __('Winkels') }}
-                    <button type="button" class="btn btn-outline-primary  float-right">Add</button>
+                    <a href="{{ @route('store.create') }}">
+                        <button type="button" class="btn btn-outline-primary  float-right">Add</button>
+                    </a>
                 </div>
 
                 <div class="card-body">
                     @forelse($user->family->stores as $store)
-                        <div>{{ $store->name }}</div>
+                        <div>
+                            <a href="{{ route('store.show', ['store' => $store->id]) }}">
+                                {{ $store->name }}
+                            </a>
+                            <a href="{{ route('store.edit', ['store' => $store->id]) }}">
+                                <button type="button" class="btn btn-outline-secondary float-right">Edit</button>
+                            </a>
+                        </div>
                     @empty
                         Je hebt geen winkels.
                     @endforelse
