@@ -43,3 +43,10 @@ Route::get('/categories/create', 'Category\CategoryController@create')->name('ca
 Route::get('/categories/{category}', 'Category\CategoryController@show')->name('category.show');
 Route::post('/categories/{category}', 'Category\CategoryController@update')->name('category.update');
 Route::get('/categories/{category}/edit', 'Category\CategoryController@edit')->name('category.edit');
+
+Route::get('/transactions', 'Transaction\TransactionController@index')->name('transaction.index');
+Route::post('/transactions', 'Transaction\TransactionController@store')->name('transaction.store');
+Route::get('/transactions/create', 'Transaction\TransactionController@create')->name('transaction.create');
+Route::get('/transactions/{transaction}', 'Transaction\TransactionController@show')->name('transaction.show');
+Route::post('/transactions/{transaction}', 'Transaction\TransactionController@update')->name('transaction.update');
+Route::get('/transactions/{transaction}/edit', 'Transaction\TransactionController@edit')->name('transaction.edit');

@@ -42,4 +42,8 @@ class User extends Authenticatable
     public function family() {
         return $this->belongsTo('App\Family', 'family_id');
     }
+
+    public function transactions() {
+        return $this->hasMany('App\Transaction');
+    }
 }

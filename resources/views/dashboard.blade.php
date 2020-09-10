@@ -6,7 +6,13 @@
     <div class="row">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Transacties') }}</div>
+                <div class="card-header">{{ __('Transacties') }}
+                    <div class="float-right">
+                        <a href="{{ @route('transaction.create') }}">
+                            <button type="button" class="btn btn-outline-secondary  float-right">Add</button>
+                        </a>
+                    </div>
+                </div>
 
                 <div class="card-body">
                     <ul class="nav nav-tabs">
@@ -17,17 +23,22 @@
                             <a class="nav-link" href="#familietransacties" data-toggle="tab">Familie</a>
                         </li>
                     </ul>
-
                     <div class="tab-content">
                         <div class="tab-pane active" id="eigentransacties">
                             <ul>
-                                <li>- 1000 euro</li>
-                                <li>+ 3000 euro</li>
+
+                                @foreach($user->transactions as $transaction)
+                                    <li>{{ number_format($transaction->bedrag, 2, ',', '.') }} euro</li>
+                                @endforeach
+
                             </ul>
 
                         </div>
                         <div class="tab-pane" id="familietransacties">
 
+                            @foreach($user->family->transactions as $transaction)
+                                <li>{{ number_format($transaction->bedrag, 2, ',', '.') }} euro</li>
+                            @endforeach
 
                         </div>
                     </div>
@@ -47,7 +58,7 @@
                     {{ __('Familie') }}
                     @if($user->id === $user->family->owner_id)
                         <a href="{{ @route('user.create') }}">
-                            <button type="button" class="btn btn-outline-primary  float-right">Add</button>
+                            <button type="button" class="btn btn-outline-secondary  float-right">Add</button>
                         </a>
                     @endif
                 </div>
@@ -58,7 +69,9 @@
                     @endphp
                     @foreach($user->family->users as $member)
                         @if($member->id !== $user->id && $member->active)
-                            <div>{{ $member->volledigeNaam() }}</div>
+                            <div class="mb-3">
+                                {{ $member->volledigeNaam() }}
+                            </div>
                             @php
                                 $isErFamilie = 1;
                             @endphp
@@ -75,13 +88,13 @@
                 <div class="card-header">
                     {{ __('Winkels') }}
                     <a href="{{ @route('store.create') }}">
-                        <button type="button" class="btn btn-outline-primary  float-right">Add</button>
+                        <button type="button" class="btn btn-outline-secondary  float-right">Add</button>
                     </a>
                 </div>
 
                 <div class="card-body">
                     @forelse($user->family->stores as $store)
-                        <div>
+                        <div class="mb-4">
                             <a href="{{ route('store.show', ['store' => $store->id]) }}">
                                 {{ $store->name }}
                             </a>
@@ -98,13 +111,13 @@
                 <div class="card-header">
                     {{ __('Categorien') }}
                     <a href="{{ @route('category.create') }}">
-                        <button type="button" class="btn btn-outline-primary  float-right">Add</button>
+                        <button type="button" class="btn btn-outline-secondary  float-right">Add</button>
                     </a>
                 </div>
 
                 <div class="card-body">
                     @forelse($user->family->categories as $categorie)
-                        <div>
+                        <div class="mb-4">
                             <a href="{{ route('category.show', ['category' => $categorie->id]) }}">
                                 {{ $categorie->category }}
                             </a>

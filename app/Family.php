@@ -30,4 +30,8 @@ class Family extends Model
     public function owner() {
         return $this->hasOne('App\User', 'owner_id', 'id');
     }
+
+    public function transactions() {
+        return $this->hasMany('App\Transaction');
+    }
 }
